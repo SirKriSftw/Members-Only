@@ -11,13 +11,15 @@
 <% if @posts.empty? %>
     <p> There are no posts :( </p>
 <% else %>
-    <ul>
+    <ul style = "list-style: none;">
         <% @posts.each do |post| %>
-            <li>
-                <%= "#{post.user.username}" if user_signed_in? %>
-                <%= post.title %>
+            <li style = "border: 2px solid black;">
+                <%= "@#{post.user.username}" if user_signed_in? %>
+                <%= "@???" if !user_signed_in? %> <br />
+                <b><%= post.title %></b> <br />
                 <%= post.body %>
             </li>
+            <br />
         <% end %>
     </ul>
 <% end %>
