@@ -1,8 +1,23 @@
 <h1>All Posts</h1>
 
 <% if current_user %>
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete} %>
+    <%= link_to "New Post", new_post_path %>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete} %>    
 <% else %>
     <%= link_to "Sign Up", new_user_registration_path %>
     <%= link_to "Sign In", new_user_session_path %>
+<% end %>
+
+<% if @posts.empty? %>
+    <p> There are no posts :( </p>
+<% else %>
+    <ul>
+        <% @posts.each do |post| %>
+            <li>
+                <%= "#{post.user.username}" if user_signed_in? %>
+                <%= post.title %>
+                <%= post.body %>
+            </li>
+        <% end %>
+    </ul>
 <% end %>
